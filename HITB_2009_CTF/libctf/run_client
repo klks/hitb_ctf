@@ -1,0 +1,1 @@
+./client.ctf client_configs/public.key 4455 client_configs/ctf_client_flag1.txt

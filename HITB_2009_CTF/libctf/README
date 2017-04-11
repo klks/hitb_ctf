@@ -1,0 +1,46 @@
+How to compile and run shit
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Short instruction on how to string everything
+
+Compiling Miracl
+~~~~~~~~~~~~~~~~
+1. Before compiling anything else, you need to compile miracl
+2. Go to miracl/source
+3. chmod 755 linux
+4. ./linux
+5. Securing miracl.a
+ 5a. Hex edit miracl.a and change the letters MIRACL to anything else
+6. copy miracl.a to where libctf is
+
+Compiling LibCtf
+~~~~~~~~~~~~~~~~
+1. chmod 755 build_libctf
+2. ./build_libctf
+
+*Note: For release code
+1. Edit libctf.h
+2. Comment the #define DEBUG directive
+3. If your building code for daemon, comment the #define CTF_SERVER directive
+4. Dont screw it up :)
+
+God, Client
+~~~~~~~~~~~
+1. God.c is the remote control to talk to libctf, look in "build_god" for compile instructions
+2. client-daemon.c is the sample daemon which uses libctf, look in "build_client" for compile instructions
+3. server-daemon.c is some other testing stuff, dont bother :)
+4. "run_client" is a simple script to execute the client and listen on a certain port with a certain keyfile
+5. "daemon2.c" is the code i used on the CTF VM
+
+Implemending Seperate Listener Socket
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Add this code to daemon for libctf to listen on a different port, useful for udp protocols
+
+//Change accordingly
+#define LIBCTF_PUBLICKEY        "public.key"
+#define LIBCTF_FLAG             "flag.txt"
+
+/*---LibCtf Code Start---*/
+if(CtfLib_Init(LIBCTF_FLAG) == -1) exit(1);
+if(CtfLib_LoadPublicKey(LIBCTF_PUBLICKEY) == -1) exit(1);
+CtfLib_MakeStandAloneSocket(161);	//161 is the port i want to listen on for libctf
+/*---LibCtf Code End---*/

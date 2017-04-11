@@ -1,0 +1,7 @@
+#!/bin/bash
+#Build libctf
+gcc -c -m32 -lpthread -O2 libctf.c libctf_md5.c
+ar rc libctf.a libctf.o libctf_md5.o
+rm libctf.o libctf_md5.o
+
+echo "libctf built" 

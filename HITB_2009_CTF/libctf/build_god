@@ -1,0 +1,11 @@
+#!/bin/bash
+#Clean shit up
+rm god.ctf
+
+./build_libctf
+
+#Build god
+gcc god.c libctf.a miracl.a -O2 -o god.ctf
+strip -s god.ctf
+
+echo "god.ctf built"

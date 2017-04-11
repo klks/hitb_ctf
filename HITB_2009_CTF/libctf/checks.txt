@@ -1,0 +1,5 @@
+libctf
+-
+1. Check if daemon is up
+2. Check daemon CRC
+3. Check flag

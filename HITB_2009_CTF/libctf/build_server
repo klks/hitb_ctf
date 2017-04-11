@@ -1,0 +1,11 @@
+#!/bin/bash
+#Clean shit up
+rm server.ctf
+
+./build_libctf
+
+#Build server
+gcc server-daemon.c libctf.a miracl.a -O2 -o server.ctf
+strip -s server.ctf
+
+echo "server.ctf built"

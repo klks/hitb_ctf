@@ -1,0 +1,76 @@
+ctf_bin1 - Rating 4/10 for first serial and 7/10 for spotting the 2nd serial
+~~~~~~~~
+Solution 1 : Compete-- don't envy.- Yemeni
+Solution 2 : Hi CTF09, Welcome to my world!
+This crackme is all about endurance and patience and is 2 fold.
+The wize text manifests itself @ 0x41FF1D revealing Solution 1
+
+Taking each byte which is xored in the loop in order of execution
+revals Solution 2
+
+ctf_bin2 - Rating 5/10
+~~~~~~~~
+Solution : 061E8FEC0D9E9EBA4B69A28A5632DBBEE7216AF4
+This binary is based on threads. It has 5 of em
+each thread decrypts part of the message. The text only
+appears at a certain loop count. So this is also like an
+endurance trace with you watching the buffer till the text
+appears.
+
+ctf_bin3 - Rating 7/10
+~~~~~~~~
+Solution : 4292200D600F70612A0D54E68F64265625D07A6A361D95D8B34CFA4771B12154
+This binary involes some patching (If you follow the rules too much it will get you nowhere).
+Once size check is bypassed you are led to a code routing which loads the file
+you supplied into memory does a CRC on that piece of memory and the result
+is compared againts the first 4 bytes of the loded file.
+so its <checksum.4><shellcode.n>. If all check out the contents of that file is
+executed.
+
+To solve this the team needs to look in the .rsrc section of the file and extract a file.
+The file has the words png in the header reversed to gnp. Reverse that gnp to png and open
+in an image editor and they will be presented with a datamatrix. Decode the datamatrix and
+they will get a b64 hash. decode the b64 hash and it will reveal how the code was encrypted
+
+---B64 Content Start---
+//You made it this far :)
+for(int i=0;i<64;i++)
+{
+	EncryptedBuffer[i] = cBuffer[i] ^ 0xfe;
+	EncryptedBuffer[i] += 0xbd;
+	EncryptedBuffer[i] ^= 0x38;
+}
+---B64 Content End---
+
+So teams will need to code the solution (in reverse to decrypt :D) into the input file for it to
+spit out the correct decrypted buffer
+
+ctf_bin4 - Rating 2/10
+~~~~~~~~
+Solution : C<)n&Yw+{rHFG|XD^)g8nY\0N2
+This is simple crackme, just reverse the algorithmn againts the output to get the solution :D
+But first you have to get past all the anti-debugs riaf put inside :D
+*still incomplete, waiting for anti-debug code to be placed inside.
+
+ctf_bin5 - Rating 3/10
+~~~~~~~~
+Solution : 20518BBC67C415ADCA9C1337654E7885A02C
+Another simple crackme, just make the checks happy :D
+
+---Serial Algorithmn Start---
+Serial Format
+[crc.first4][serial_1.4][serial_2.4][serial_3.4][serial_4.4][serial_5.4][serial_6.4][serial_7.4][crc.last4]
+CCCC1111222233334444555566667777DDDD
+    w1  w2  w3  w4  w5  w6  w7
+
+CCCCDDDD = CRC(w1-w7)
+
+w5 = 0x1337 [w5 / (0x191) == (0xC), w5 % (0x191) == (0x6B)]
+w3 = w7 - (w4 % w2)
+w1 = w6 + (w5 + w5)
+w2 = w2 = (0xFFFF - w1) - (0xC7F)
+w6 = w7 - w5
+w4 = (w7 - w5) + w6
+w7 = any prime number which dosent have a [0,1,2,3,4,6,9,A-F] in its numbers
+    mod 3 = 1 and mod 99 = 64
+---Serial Algorithmn End---

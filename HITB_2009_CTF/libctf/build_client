@@ -1,0 +1,11 @@
+#!/bin/bash
+#Clean shit up
+rm client.ctf
+
+./build_libctf
+
+#Build client
+gcc client-daemon.c libctf.a miracl.a -lpthread -O2 -o client.ctf
+strip -s client.ctf
+
+echo "client.ctf built"

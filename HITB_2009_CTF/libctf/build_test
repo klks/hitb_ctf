@@ -1,0 +1,11 @@
+#!/bin/bash
+#Clean shit up
+rm crypto-test.ctf
+
+./build_libctf
+
+#Build crypto-test
+gcc test-crypto.c libctf.a miracl.a -O2 -o test-crypto.ctf
+strip -s test-crypto.ctf
+
+echo "test-crypto.ctf built"
