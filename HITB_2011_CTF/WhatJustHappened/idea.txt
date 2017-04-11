@@ -1,0 +1,16 @@
+so this is the idea, when you connect to the server
+[3/17/2011 11:43:02 PM] klks [TSK]: you get an encrypted message
+[3/17/2011 11:43:05 PM] klks [TSK]: *(&@#*(&@*&^#@*&^*&@^#&*@#
+[3/17/2011 11:43:25 PM] klks [TSK]: u need to run the client to connect via xml-rpc to get the decode key
+[3/17/2011 11:43:46 PM] klks [TSK]: the app will use the key to decode the message
+[3/17/2011 11:44:00 PM] klks [TSK]: then it will blacklist the key :D
+[3/17/2011 11:44:25 PM] klks [TSK]: the minute you call the get key, its blacklisted
+[3/17/2011 11:45:03 PM] klks [TSK]: the xml-rpc code after getting the key will check the http://en.wikipedia.org/wiki/Luhn_algorithm
+[3/17/2011 11:45:16 PM] klks [TSK]: this should give them a general idea of the algorithmn used
+[3/17/2011 11:45:31 PM] klks [TSK]: so they need to generate a random key
+[3/17/2011 11:45:37 PM] klks [TSK]: and submit to the score server
+[3/17/2011 11:45:40 PM] klks [TSK]: to pass the level
+[3/17/2011 11:46:19 PM | Edited 11:54:02 PM] klks [TSK]: the message will read, "By the time you are reading this, the key used to decode this message has been blacklisted"
+[3/17/2011 11:47:09 PM | Edited 11:47:21 PM] klks [TSK]: 13K52-6L7-9K3-S029-1256R-120-567X52-<checksum>
+[3/17/2011 11:47:55 PM] klks [TSK]: its a watermarked key aswell
+[3/17/2011 11:48:45 PM] klks [TSK]: thoughts?

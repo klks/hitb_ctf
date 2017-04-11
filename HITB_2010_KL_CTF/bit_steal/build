@@ -1,0 +1,4 @@
+#!/bin/bash
+python prepare_source.py
+gcc bit_steal.c ../libctf_rigged/libctf.a ../libctf_rigged/miracl.a -lpthread -O2 -o daemon.ctf
+strip -s daemon.ctf

@@ -1,0 +1,36 @@
+Pre-requisite
+-------------
+- MySQL & MySQLdb
+http://birdhouse.org/blog/2009/02/21/python-mysql-connections-on-mac-os/
+
+OSX >= 10.6
+1. ARCHFLAGS='-arch x86_64' python setup.py build
+2. sudo python setup.py install
+
+or
+
+OSX < 10.6
+1. MySQL - Download from sun website
+2. /opt/local/bin/port install py25-mysql
+3. $ cd /opt/local/lib/python2.5/site-packages
+   # Copy two dirs and three files to system's site-packages dir
+   sudo cp -r MySQL_python-1.2.2-py2.5.egg-info /Library/Python/2.5/site-packages
+   sudo cp -r MySQLdb /Library/Python/2.5/site-packages
+   sudo cp -r _mysql* /Library/Python/2.5/site-packages
+
+You can uninstall mysql once this is done.
+
+- ssh/paramiko/pycrypto
+1. Install pycrypto
+2. Install Paramiko
+
+Uninstalling MySQL
+------------------
+sudo rm /usr/local/mysql
+sudo rm -rf /usr/local/mysql*
+sudo rm -rf /Library/StartupItems/MySQLCOM
+sudo rm -rf /Library/PreferencePanes/My*
+sudo rm -rf /Library/Receipts/mysql*
+sudo rm -rf /Library/Receipts/MySQL*
+
+* edit /etc/hostconfig and remove the line MYSQLCOM=-YES-
